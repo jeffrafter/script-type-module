@@ -4,16 +4,6 @@ __scriptTypeModuleEval = function(__moduleSrc){
 (function () {
 'use strict';
 
-function currentScript() {
-  return document.currentScript || document._currentScript || getCurrentScriptTheHardWay();
-}
-
-function getCurrentScriptTheHardWay() {
-  // Should be more complex than this.
-  var scripts = document.getElementsByTagName('script');
-  return scripts[scripts.length - 1];
-}
-
 class Cluster {
   constructor(count){
     this.count = count;
@@ -89,7 +79,7 @@ var addModuleTools = function(registry, dynamicImport){
       }
     };
   };
-}
+};
 
 // TODO saving this space in case I want to support multiple workers
 
@@ -101,7 +91,7 @@ var execute = function({ url, code, map }){
   }
 
    __scriptTypeModuleEval(code);
-}
+};
 
 const prefix = '\n//# source' + 'MappingURL=data:application/json;base64,';
 
@@ -115,7 +105,7 @@ class ModuleTree {
     this.fetchPromise = new Promise((resolve, reject) => {
       this.resolve = resolve;
       this.reject = reject;
-    })
+    });
   }
 
   increment() {
@@ -320,7 +310,7 @@ var Registry = class {
       moduleScript.instantiate();
     }
   }
-}
+};
 
 function getValue(moduleScript, name, par) {
   return function(){
@@ -332,8 +322,9 @@ let cluster = new Cluster(1);
 
 let registry = new Registry();
 let anonCount = 0;
-let pollyScript = currentScript();
-let includeSourceMaps = pollyScript.dataset.noSm == null;
+// let pollyScript = currentScript();
+// let includeSourceMaps = pollyScript.dataset.noSm == null;
+let includeSourceMaps = false;
 
 addModuleTools(registry, dynamicImport);
 

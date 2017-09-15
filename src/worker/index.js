@@ -18,6 +18,7 @@ onmessage = function(ev){
       return resp.text();
     });
 
+  console.time("Importing " + url)
   fetchPromise
   .then(function(src){
     let state = {
@@ -56,6 +57,7 @@ onmessage = function(ev){
     let code = includeSourceMaps ? result.code : result;
     let map = includeSourceMaps ? result.map.toJSON() : undefined;
 
+    console.timeEnd("Importing " + url)
     return {
       code: code,
       deps: state.deps,

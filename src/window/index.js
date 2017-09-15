@@ -12,8 +12,9 @@ let cluster = new Cluster(1);
 let registry = new Registry();
 let forEach = Array.prototype.forEach;
 let anonCount = 0;
-let pollyScript = currentScript();
-let includeSourceMaps = pollyScript.dataset.noSm == null;
+// let pollyScript = currentScript();
+// let includeSourceMaps = pollyScript.dataset.noSm == null;
+let includeSourceMaps = false;
 
 addModuleTools(registry, dynamicImport);
 

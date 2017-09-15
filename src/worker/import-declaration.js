@@ -7,6 +7,12 @@ export default function(node, state){
   // TODO better namespace naming algo
   let namespaceName = getNamespaceName(specifiers, state);
 
+  // Custom resolver
+  if (source.value.startsWith("@")) {
+    source.value = source.value.replace(/@/, 'https://tiny-packages.s3.amazonaws.com/dist/')
+    if (!source.value.endsWith(".js")) source.value = source.value + '.js';
+  }
+
   state.deps.push(new URL(source.value, url).toString());
 
   specifiers.forEach(function(node){
